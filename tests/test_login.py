@@ -13,3 +13,20 @@ config.read("config/config.ini")
 
 # Setup logger
 logger = setup_logger()
+
+# Fixture for browser setup
+@pytest.fixture(params=[("chrome", config['DEFAULT']['headless'] == 'true'), ("firefox", config['DEFAULT']['headless'] == 'true')])
+def driver(request):
+    browser, headless = request.param
+    if browser == "chrome":
+        options = Options()
+        if headless:
+            options.add_argument("--headless")
+        driver = webdriver.Chrome(options=options)
+    else:
+        options = FirefoxOptions()
+        if headless:
+            options.add_argument("--headless")
+        driver = webdriver.Firefox(options=options)
+    yield driver
+    driver.quit()

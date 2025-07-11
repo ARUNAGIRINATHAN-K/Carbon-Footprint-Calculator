@@ -20,3 +20,6 @@ class LoginPage:
     def enter_credentials(self, username, password):
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.username_field)).send_keys(username)
         self.driver.find_element(*self.password_field).send_keys(password)
+
+    def click_login(self):
+        self.driver.find_element(*self.login_button).click()

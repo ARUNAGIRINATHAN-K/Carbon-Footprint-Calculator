@@ -23,3 +23,6 @@ class LoginPage:
 
     def click_login(self):
         self.driver.find_element(*self.login_button).click()
+
+    def get_error_message(self):
+        return WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.error_message)).text

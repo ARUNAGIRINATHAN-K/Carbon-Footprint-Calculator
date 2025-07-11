@@ -26,3 +26,12 @@ class LoginPage:
 
     def get_error_message(self):
         return WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.error_message)).text
+
+    def take_screenshot(self, test_name):
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        screenshot_dir = "screenshots"
+        if not os.path.exists(screenshot_dir):
+            os.makedirs(screenshot_dir)
+        screenshot_path = f"{screenshot_dir}/{test_name}_{timestamp}.png"
+        self.driver.save_screenshot(screenshot_path)
+        return screenshot_path

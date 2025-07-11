@@ -30,3 +30,9 @@ def driver(request):
         driver = webdriver.Firefox(options=options)
     yield driver
     driver.quit()
+
+# Test data for parameterization
+test_data = [
+    (config['Credentials']['valid_username'], config['Credentials']['valid_password'], True, "inventory.html"),
+    (config['Credentials']['invalid_username'], config['Credentials']['invalid_password'], False, "Username and password do not match")
+]

@@ -13,3 +13,6 @@ class LoginPage:
         self.password_field = (By.ID, "password")
         self.login_button = (By.ID, "login-button")
         self.error_message = (By.CSS_SELECTOR, "h3[data-test='error']")
+
+    def open(self):
+        self.driver.get(self.url)

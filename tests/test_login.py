@@ -6,3 +6,7 @@ from configparser import ConfigParser
 from pages.login_page import LoginPage
 from utilities.logger import setup_logger
 import os
+
+# Load configuration
+config = ConfigParser()
+config.read("config/config.ini")

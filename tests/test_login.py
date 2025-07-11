@@ -10,3 +10,6 @@ import os
 # Load configuration
 config = ConfigParser()
 config.read("config/config.ini")
+
+# Setup logger
+logger = setup_logger()

@@ -1,0 +1,42 @@
+{
+  "transport": {
+    "car_gas": 0.4,
+    "car_electric": 0.15,
+    "car_hybrid": 0.25,
+    "bus": 0.1,
+    "flight_short": 0.25,
+    "flight_long": 0.2
+  },
+  "diet": {
+    "meat": 7.0,
+    "vegetarian": 3.0,
+    "vegan": 1.5
+  },
+  "energy": {
+    "kwh": 0.5
+  },
+  "global_avg": 5000,
+  "benchmarks": {
+    "excellent": 2000,
+    "good": 3500,
+    "average": 5000,
+    "poor": 7500,
+    "very_poor": 10000
+  },
+  "sources": {
+    "transport": "EPA Vehicle Emissions Database",
+    "diet": "FAO Food and Agriculture Organization",
+    "energy": "EIA Energy Information Administration",
+    "global_avg": "World Bank Global Carbon Atlas"
+  },
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2024-01-01",
+    "units": {
+      "transport": "kg CO2 per mile",
+      "diet": "kg CO2 per meal",
+      "energy": "kg CO2 per kWh",
+      "global_avg": "kg CO2 per year per person"
+    }
+  }
+}

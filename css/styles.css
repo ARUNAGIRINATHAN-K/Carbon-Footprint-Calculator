@@ -1,0 +1,232 @@
+/* Custom styles for Carbon Footprint Calculator */
+
+:root {
+    --eco-green: #198754;
+    --light-green: #d1e7dd;
+    --dark-green: #146c43;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Custom green theme for eco-friendly feel */
+.bg-success {
+    background-color: var(--eco-green) !important;
+}
+
+.text-success {
+    color: var(--eco-green) !important;
+}
+
+.btn-success {
+    background-color: var(--eco-green);
+    border-color: var(--eco-green);
+}
+
+.btn-success:hover {
+    background-color: var(--dark-green);
+    border-color: var(--dark-green);
+}
+
+/* Card styling */
+.card {
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+.card-header {
+    border-radius: 10px 10px 0 0 !important;
+    border-bottom: none;
+}
+
+/* Form styling */
+.form-control:focus {
+    border-color: var(--eco-green);
+    box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+}
+
+.form-select:focus {
+    border-color: var(--eco-green);
+    box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+}
+
+/* Input group styling */
+.input-group-text {
+    background-color: var(--light-green);
+    border-color: #ced4da;
+    color: var(--dark-green);
+    font-weight: 500;
+}
+
+/* Progress bar customization */
+.progress {
+    background-color: #e9ecef;
+    border-radius: 10px;
+}
+
+.progress-bar {
+    border-radius: 10px;
+}
+
+/* Chart container styling */
+.tab-content {
+    padding-top: 20px;
+    min-height: 300px;
+}
+
+/* Tooltip styling */
+.tooltip {
+    font-size: 0.875rem;
+}
+
+/* Alert styling */
+.alert {
+    border-radius: 10px;
+    border: none;
+}
+
+/* Animation for results section */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Suggestion cards */
+.suggestion-card {
+    border-left: 4px solid var(--eco-green);
+    margin-bottom: 15px;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.suggestion-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateX(5px);
+}
+
+/* Statistics styling */
+.stats-card {
+    background: linear-gradient(135deg, var(--light-green), #ffffff);
+    border: 1px solid rgba(25, 135, 84, 0.1);
+}
+
+/* Footer styling */
+footer a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: var(--light-green) !important;
+}
+
+/* Table styling */
+.table th {
+    background-color: var(--light-green);
+    color: var(--dark-green);
+    border: none;
+    font-weight: 600;
+}
+
+.table td {
+    border-color: rgba(25, 135, 84, 0.1);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .row.text-center h3,
+    .row.text-center h4 {
+        font-size: 1.5rem;
+    }
+    
+    .table-responsive {
+        font-size: 0.875rem;
+    }
+}
+
+/* Loading animation */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(25, 135, 84, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--eco-green);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Icon styling */
+.fas, .fab {
+    color: inherit;
+}
+
+/* Custom button styles */
+.btn-eco {
+    background: linear-gradient(135deg, var(--eco-green), var(--dark-green));
+    border: none;
+    color: white;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-eco:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(25, 135, 84, 0.3);
+    color: white;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .card {
+        border: 2px solid #000;
+    }
+    
+    .btn-success {
+        border: 2px solid #000;
+    }
+    
+    .form-control,
+    .form-select {
+        border: 2px solid #000;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized Carbon Footprint Calculator</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-leaf me-2"></i>
+                Carbon Footprint Calculator
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#aboutModal">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#howItWorksModal">How It Works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showHistory()">History</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <!-- Alert for trends -->
+        <div id="trendAlert" class="alert alert-warning alert-dismissible fade" role="alert" style="display: none;">
+            <strong>Trend Alert!</strong> <span id="trendMessage"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <div class="row">
+            <!-- Input Form -->
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0"><i class="fas fa-calculator me-2"></i>Calculate Your Carbon Footprint</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="carbonForm" novalidate>
+                            <!-- Transportation Section -->
+                            <h6 class="text-success mb-3">
+                                <i class="fas fa-car me-2"></i>Transportation
+                            </h6>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="carMiles" class="form-label">
+                                        Car Miles (Daily)
+                                        <i class="fas fa-info-circle text-muted" data-bs-toggle="tooltip" 
+                                           title="Average daily miles driven by car"></i>
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="carMiles" min="0" step="0.1" value="0">
+                                        <span class="input-group-text">miles</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="carType" class="form-label">Car Type</label>
+                                    <select class="form-select" id="carType">
+                                        <option value="car_gas">Gasoline</option>
+                                        <option value="car_electric">Electric</option>
+                                        <option value="car_hybrid">Hybrid</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="publicTransport" class="form-label">
+                                        Public Transport (Daily)
+                                        <i class="fas fa-info-circle text-muted" data-bs-toggle="tooltip" 
+                                           title="Daily miles using buses, trains, or other public transport"></i>
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="publicTransport" min="0" step="0.1" value="0">
+                                        <span class="input-group-text">miles</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="flights" class="form-label">
+                                        Flight Miles (Monthly)
+                                        <i class="fas fa-info-circle text-muted" data-bs-toggle="tooltip" 
+                                           title="Average monthly flight miles"></i>
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="flights" min="0" step="1" value="0">
+                                        <span class="input-group-text">miles</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="flightType" class="form-label">Flight Type</label>
+                                <select class="form-select" id="flightType">
+                                    <option value="flight_short">Short Haul (&lt; 1500 miles)</option>
+                                    <option value="flight_long">Long Haul (&gt; 1500 miles)</option>
+                                </select>
+                            </div>
+
+                            <!-- Diet Section -->
+                            <h6 class="text-success mb-3 mt-4">
+                                <i class="fas fa-utensils me-2"></i>Diet
+                            </h6>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="meatMeals" class="form-label">
+                                        Meat Meals (Daily)
+                                        <i class="fas fa-info-circle text-muted" data-bs-toggle="tooltip" 
+                                           title="Number of meals containing meat per day"></i>
+                                    </label>
+                                    <input type="number" class="form-control" id="meatMeals" min="0" step="1" value="0">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="vegMeals" class="form-label">
+                                        Vegetarian Meals (Daily)
+                                        <i class="fas fa-info-circle text-muted" data-bs-toggle="tooltip" 
+                                           title="Number of vegetarian meals per day"></i>
+                                    </label>
+                                    <input type="number" class="form-control" id="vegMeals" min="0" step="1" value="0">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="veganMeals" class="form-label">
+                                        Vegan Meals (Daily)
+                                        <i class="fas fa-info-circle text-muted" data-bs-toggle="tooltip" 
+                                           title="Number of vegan meals per day"></i>
+                                    </label>
+                                    <input type="number" class="form-control" id="veganMeals" min="0" step="1" value="0">
+                                </div>
+                            </div>
+
+                            <!-- Energy Section -->
+                            <h6 class="text-success mb-3 mt-4">
+                                <i class="fas fa-bolt me-2"></i>Energy Use
+                            </h6>
+                            
+                            <div class="mb-3">
+                                <label for="energyUse" class="form-label">
+                                    Daily Energy Consumption
+                                    <i class="fas fa-info-circle text-muted" data-bs-toggle="tooltip" 
+                                       title="Average daily electricity usage in kilowatt-hours"></i>
+                                </label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="energyUse" min="0" step="0.1" value="0">
+                                    <span class="input-group-text">kWh</span>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-success btn-lg w-100" onclick="calculateFootprint()">
+                                <i class="fas fa-calculator me-2"></i>Calculate Footprint
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="col-lg-6">
+                <div id="resultsSection" style="display: none;">
+                    <!-- Footprint Summary -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><i class="fas fa-chart-line me-2"></i>Your Carbon Footprint</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row text-center">
+                                <div class="col-md-4">
+                                    <h3 class="text-success" id="dailyFootprint">0</h3>
+                                    <small class="text-muted">kg CO₂/day</small>
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 class="text-primary" id="weeklyFootprint">0</h3>
+                                    <small class="text-muted">kg CO₂/week</small>
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 class="text-warning" id="annualFootprint">0</h3>
+                                    <small class="text-muted">kg CO₂/year</small>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <div class="progress" style="height: 20px;">
+                                    <div id="footprintProgress" class="progress-bar bg-success" role="progressbar" 
+                                         style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                    </div>
+                                </div>
+                                <small class="text-muted">Compared to global average (5,000 kg CO₂/year)</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Visualizations</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="nav nav-tabs" id="chartTabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="comparison-tab" data-bs-toggle="tab" 
+                                            data-bs-target="#comparison" type="button" role="tab">
+                                        Comparison
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="breakdown-tab" data-bs-toggle="tab" 
+                                            data-bs-target="#breakdown" type="button" role="tab">
+                                        Breakdown
+                                    </button>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="chartTabContent">
+                                <div class="tab-pane fade show active" id="comparison" role="tabpanel">
+                                    <canvas id="comparisonChart" width="400" height="200"></canvas>
+                                </div>
+                                <div class="tab-pane fade" id="breakdown" role="tabpanel">
+                                    <canvas id="breakdownChart" width="400" height="200"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Suggestions -->
+                    <div class="card shadow">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><i class="fas fa-lightbulb me-2"></i>Personalized Suggestions</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="suggestions">
+                                <!-- Suggestions will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistics Panel -->
+                <div id="statisticsSection" style="display: none;">
+                    <div class="card shadow">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0"><i class="fas fa-chart-area me-2"></i>Your Statistics</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row text-center">
+                                <div class="col-md-4">
+                                    <h4 class="text-info" id="avgFootprint">0</h4>
+                                    <small class="text-muted">Average (kg CO₂/day)</small>
+                                </div>
+                                <div class="col-md-4">
+                                    <h4 class="text-secondary" id="stdDevFootprint">0</h4>
+                                    <small class="text-muted">Std. Deviation</small>
+                                </div>
+                                <div class="col-md-4">
+                                    <h4 class="text-warning" id="totalEntries">0</h4>
+                                    <small class="text-muted">Total Entries</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Section -->
+        <div id="historySection" class="mt-5" style="display: none;">
+            <div class="card shadow">
+                <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="fas fa-history me-2"></i>Calculation History</h5>
+                    <div>
+                        <button class="btn btn-light btn-sm me-2" onclick="clearHistory()">
+                            <i class="fas fa-trash"></i> Clear All
+                        </button>
+                        <button class="btn btn-light btn-sm" onclick="hideHistory()">
+                            <i class="fas fa-times"></i> Close
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Daily CO₂ (kg)</th>
+                                    <th>Annual CO₂ (kg)</th>
+                                    <th>Transport</th>
+                                    <th>Diet</th>
+                                    <th>Energy</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyTableBody">
+                                <!-- History entries will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light mt-5 py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6>Carbon Footprint Calculator</h6>
+                    <p class="small">Helping you track and reduce your environmental impact.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <h6>Data Sources</h6>
+                    <p class="small">
+                        <a href="https://www.epa.gov/" class="text-light">EPA</a> | 
+                        <a href="https://www.ipcc.ch/" class="text-light">IPCC</a> | 
+                        <a href="https://www.carbontrust.com/" class="text-light">Carbon Trust</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- About Modal -->
+    <div class="modal fade" id="aboutModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title">About This Calculator</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>This Carbon Footprint Calculator helps you understand your daily environmental impact and provides personalized suggestions for reducing your carbon emissions.</p>
+                    <p><strong>Features:</strong></p>
+                    <ul>
+                        <li>Calculate emissions from transportation, diet, and energy use</li>
+                        <li>Compare your footprint to global averages</li>
+                        <li>Get personalized reduction suggestions</li>
+                        <li>Track your progress over time</li>
+                        <li>Statistical analysis of your habits</li>
+                    </ul>
+                    <p><small class="text-muted">All calculations are based on established emission factors from EPA, IPCC, and other credible sources.</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works Modal -->
+    <div class="modal fade" id="howItWorksModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title">How It Works</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <h6>Calculation Method</h6>
+                    <p>Your carbon footprint is calculated using scientifically-backed emission factors:</p>
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6 class="text-success">Transportation</h6>
+                            <ul class="small">
+                                <li>Gas car: 0.4 kg CO₂/mile</li>
+                                <li>Electric car: 0.15 kg CO₂/mile</li>
+                                <li>Hybrid car: 0.25 kg CO₂/mile</li>
+                                <li>Public transport: 0.1 kg CO₂/mile</li>
+                                <li>Flights: 0.2-0.25 kg CO₂/mile</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6 class="text-success">Diet</h6>
+                            <ul class="small">
+                                <li>Meat meal: 7 kg CO₂</li>
+                                <li>Vegetarian meal: 3 kg CO₂</li>
+                                <li>Vegan meal: 1.5 kg CO₂</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6 class="text-success">Energy</h6>
+                            <ul class="small">
+                                <li>Electricity: 0.5 kg CO₂/kWh</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h6 class="mt-3">Suggestions Algorithm</h6>
+                    <p class="small">Our algorithm analyzes your highest-impact categories and provides weighted suggestions based on potential CO₂ reduction. Higher-impact suggestions are prioritized to maximize your environmental benefit.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="js/app.js"></script>
+</body>
+</html>

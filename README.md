@@ -1,57 +1,38 @@
-#  Automated Testing Framework
+# Personalized Carbon Footprint Calculator
 
-## 📌 Project Summary
-This is a robust Automated Testing Framework built with Python, Pytest, and Selenium WebDriver for testing web applications. The framework is designed for scalability, maintainability, and ease of use, featuring a Page Object Model (POM), configuration management, cross-browser testing, detailed logging, HTML reporting, and CI/CD integration with GitHub Actions. It currently tests the login functionality of the SauceDemo website but can be extended for other web applications.
+A comprehensive, client-side web application that helps users calculate their daily carbon footprint and provides personalized suggestions for reducing environmental impact.
 
-## Key Features
+## Features
 
-- Pytest: Flexible test execution and reporting.
-- Selenium WebDriver: Browser automation for UI testing.
-- Page Object Model: Modular and maintainable test code.
-- Cross-Browser Testing: Supports Chrome and Firefox.
-- Parameterized Tests: Efficiently tests multiple scenarios.
-- Logging: Detailed logs for debugging (logs/ directory).
-- Screenshots: Captures screenshots on test failure (screenshots/ directory).
-- HTML Reports: Generates detailed test reports (reports/ directory).
-- Configuration: Centralized settings in config.ini.
-- CI/CD: GitHub Actions workflow for automated testing.
+### Core Functionality
+- **Daily Footprint Calculation**: Calculate CO₂ emissions from transportation, diet, and energy consumption
+- **Interactive Visualizations**: Bar charts comparing to global averages and pie charts showing emission breakdowns
+- **Personalized Suggestions**: AI-driven recommendations based on user's highest-impact categories
+- **History Tracking**: Local storage of calculations with statistical analysis
+- **Trend Analysis**: Detection of increasing/decreasing emission patterns over time
 
-## 📂 Project Structure
-```
-automated-testing-framework/
-├── config/
-│   └── config.ini           # Test configuration
-├── pages/
-│   └── login_page.py       # Page Object Model
-├── tests/
-│   └── test_login.py       # Test cases
-├── utilities/
-│   └── logger.py           # Logging utility
-├── reports/                # HTML reports
-├── screenshots/            # Failure screenshots
-├── logs/                   # Test logs
-├── .github/workflows/
-│   └── ci.yml              # GitHub Actions workflow
-└── requirements.txt        # Dependencies
-```
+### Data Science Integration
+- **Statistical Analysis**: Calculate mean and standard deviation of user's footprint history
+- **Weighted Scoring**: Prioritize suggestions by potential CO₂ reduction impact
+- **Trend Detection**: Moving average calculations to identify emission pattern changes
+- **Benchmark Comparison**: Compare user's footprint against global and regional averages
 
+## Technology Stack
 
-## Install Dependencies:
-```
-pip install -r requirements.txt
-```
+- **Frontend**: HTML5, Bootstrap 5, Vanilla JavaScript (ES6+)
+- **Visualization**: Chart.js for interactive charts
+- **Data Storage**: Browser localStorage for client-side persistence
+- **Styling**: Custom CSS with eco-friendly green theme
+- **Icons**: Font Awesome for consistent iconography
 
-## Run Tests:
-```
-pytest tests/test_login.py -v --html=reports/report.html -n auto
-```
+## Installation & Setup
 
+### For GitHub Pages Hosting
+1. **Upload to GitHub**: Create a new repository and upload all files
+2. **Enable GitHub Pages**: Go to repository Settings > Pages > Source: Deploy from branch > main
+3. **Access Your Site**: Visit `https://yourusername.github.io/yourrepositoryname`
 
-## 🧪 Extending the Framework
-
-- Add New Tests: Create new files in tests/ using the same structure.
-- Add Pages: Add new page objects in pages/ for other website sections.
-- API Testing: Integrate requests for API testing.
-- Data-Driven Testing: Use CSV/JSON files for test data.
-- Advanced Reporting: Replace pytest-html with Allure for richer reports.
-- Docker: Containerize the environment for consistency.
+### For Local Development
+1. **Clone or Download**: Get the application files to your local machine  
+2. **Serve Files**: Use any static file server (Python: `python -m http.server 8000`)
+3. **Open Browser**: Navigate to `http://localhost:8000`

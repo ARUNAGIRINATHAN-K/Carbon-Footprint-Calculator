@@ -80,12 +80,11 @@ The application is ready to run on Replit:
 #### Setup Instructions
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/carbon-footprint-calculator.git
+git clone https://github.com/ARUNAGIRINATHAN-K/carbon-footprint-calculator.git
 cd carbon-footprint-calculator
 
 # Install dependencies (if using Python server)
 pip install flask
-
 # Run the development server
 python main.py
 ```
@@ -103,11 +102,6 @@ php -S localhost:8000
 ```
 
 ### Production Deployment
-
-#### Replit Deployment
-1. **Configure Domain**: Set up custom domain in Replit settings
-2. **Environment Variables**: Configure any necessary environment variables
-3. **Deploy**: Use Replit's built-in deployment features
 
 #### GitHub Pages
 1. **Upload to GitHub**: Create repository and upload files
@@ -275,7 +269,7 @@ We welcome contributions to improve the Carbon Footprint Calculator! Here's how 
 
 ### Development Setup
 1. **Fork the Repository**: Create your own copy on GitHub
-2. **Clone Locally**: `git clone https://github.com/yourusername/carbon-footprint-calculator.git`
+2. **Clone Locally**: `git clone https://github.com/ARUNAGIRINATHAN-K/carbon-footprint-calculator.git`
 3. **Create Branch**: `git checkout -b feature/your-feature-name`
 4. **Make Changes**: Implement your improvements
 5. **Test Thoroughly**: Ensure all functionality works correctly
